@@ -8,7 +8,9 @@ function App() {
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [artists, setArtists] = useState([]);
-  const [newArtist, setNewArtist] = useState('');
+  const [newArtistName, setNewArtistName] = useState('');
+  const [newArtistManagement, setNewArtistManagement] = useState('');
+  const [newArtistEmail, setNewArtistEmail] = useState('');
 
   const handleLogin = () => {
     // Simple authentication logic (you may replace this with your actual authentication mechanism)
@@ -30,7 +32,7 @@ function App() {
   const fetchArtists = async () => {
     try {
       const response = await axios.get('http://localhost:8080/artists');
-      setArtists(response.data);
+      setArtists(response.data._embedded.artistList);
     } catch (error) {
       console.error('Error fetching tasks:', error);
     }
@@ -39,11 +41,15 @@ function App() {
   const addArtist = async () => {
     try {
       const response = await axios.post('http://localhost:8080/artists', {
-        title: newArtist,
+        name: newArtistName,
+        management: newArtistManagement,
+        email: newArtistEmail,
         completed: false
       });
       setArtists([...artists, response.data]);
-      setNewArtist('');
+      setNewArtistName('');
+      setNewArtistManagement('');
+      setNewArtistEmail('');
     } catch (error) {
       console.error('Error adding new Artist:', error);
     }
@@ -67,16 +73,28 @@ function App() {
           <div>
             <input
               type="text"
-              placeholder="Enter artist"
-              value={newArtist}
-              onChange={(e) => setNewArtist(e.target.value)}
+              placeholder="Enter artist name"
+              value={newArtistName}
+              onChange={(e) => setNewArtistName(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Enter artist management"
+              value={newArtistManagement}
+              onChange={(e) => setNewArtistManagement(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Enter artist email"
+              value={newArtistEmail}
+              onChange={(e) => setNewArtistEmail(e.target.value)}
             />
             <button onClick={addArtist}>Add Artist</button>
           </div>
           <ul>
             {artists.map(artist => (
               <li key={artist.id}>
-                {artist.title}
+                {artist.name} {artist.management} {artist.email}
                 <button onClick={() => deleteArtist(artist.id)}>Delete</button>
               </li>
             ))}
