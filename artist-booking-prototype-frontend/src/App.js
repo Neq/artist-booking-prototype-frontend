@@ -2,18 +2,18 @@
 import React, { useState, useEffect } from 'react';
 import './App.css';
 import axios from 'axios';
+import ArtistList from './components/Artist/ArtistList';
+import ArtistForm from './components/Artist/ArtistForm';
+
 
 function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [artists, setArtists] = useState([]);
-  const [newArtistName, setNewArtistName] = useState('');
-  const [newArtistManagement, setNewArtistManagement] = useState('');
-  const [newArtistEmail, setNewArtistEmail] = useState('');
 
   const handleLogin = () => {
-    // Simple authentication logic (you may replace this with your actual authentication mechanism)
+    // Simple auth, replace with more sophisticated solution later
     if (username === 'user' && password === 'password') {
       setIsLoggedIn(true);
     } else {
@@ -38,18 +38,15 @@ function App() {
     }
   };
 
-  const addArtist = async () => {
+  const addArtist = async (artistData) => {
     try {
       const response = await axios.post('http://localhost:8080/artists', {
-        name: newArtistName,
-        management: newArtistManagement,
-        email: newArtistEmail,
-        completed: false
+        name: artistData.newArtistName,
+        management: artistData.newArtistManagement,
+        email: artistData.newArtistEmail,
+        completed: false 
       });
-      setArtists([...artists, response.data]);
-      setNewArtistName('');
-      setNewArtistManagement('');
-      setNewArtistEmail('');
+      setArtists([...artists, response.data]);      
     } catch (error) {
       console.error('Error adding new Artist:', error);
     }
@@ -69,37 +66,13 @@ function App() {
       {isLoggedIn ? (
         <div>
           <h1>Welcome, {username}!</h1>
-          <h1>Task Manager</h1>
+          <h1>Artist Manager</h1>
           <div>
-            <input
-              type="text"
-              placeholder="Enter artist name"
-              value={newArtistName}
-              onChange={(e) => setNewArtistName(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Enter artist management"
-              value={newArtistManagement}
-              onChange={(e) => setNewArtistManagement(e.target.value)}
-            />
-            <input
-              type="text"
-              placeholder="Enter artist email"
-              value={newArtistEmail}
-              onChange={(e) => setNewArtistEmail(e.target.value)}
-            />
-            <button onClick={addArtist}>Add Artist</button>
+            <ArtistList artists={artists} onDelete={deleteArtist} />
+            <ArtistForm onSubmit={addArtist} />
+
+            <button onClick={handleLogout}>Logout</button>
           </div>
-          <ul>
-            {artists.map(artist => (
-              <li key={artist.id}>
-                {artist.name} {artist.management} {artist.email}
-                <button onClick={() => deleteArtist(artist.id)}>Delete</button>
-              </li>
-            ))}
-          </ul>
-          <button onClick={handleLogout}>Logout</button>
         </div>
       ) : (
         <div>
