@@ -1,6 +1,5 @@
 // TaskForm.js
 import React, { useState } from 'react';
-import Button from 'react-bootstrap/Button';
 
 function TaskForm({ onSubmit }) {
   const [newArtistName, setNewArtistName] = useState('');
@@ -35,7 +34,8 @@ function TaskForm({ onSubmit }) {
               value={newArtistEmail}
               onChange={(e) => setNewArtistEmail(e.target.value)}
             />
-            <Button type="submit">Add Artist</Button>      
+            <Button type="submit">Add Artist</Button>
+      <Button type="submit">Add Task</Button>
     </form>
   );
 }
