@@ -1,18 +1,15 @@
 // App.js
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import './App.css';
-import axios from 'axios';
-import ArtistList from './components/Artist/ArtistList';
-import ArtistForm from './components/Artist/ArtistForm';
 import Button from 'react-bootstrap/Button';
-import Nav from 'react-bootstrap/Nav';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
+import Artist from './components/Artist/Artist';
 
 
 function App() {
   const [username, setUsername] = useState('');
   const [password, setPassword] = useState('');
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const [artists, setArtists] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);  
 
   const handleLogin = () => {
     // Simple auth, replace with more sophisticated solution later
@@ -27,41 +24,6 @@ function App() {
     setIsLoggedIn(false);
   };
 
-  useEffect(() => {
-    fetchArtists();
-  }, []);
-
-  const fetchArtists = async () => {
-    try {
-      const response = await axios.get('http://localhost:8080/artists');
-      setArtists(response.data._embedded.artistList);
-    } catch (error) {
-      console.error('Error fetching tasks:', error);
-    }
-  };
-
-  const addArtist = async (artistData) => {
-    try {
-      const response = await axios.post('http://localhost:8080/artists', {
-        name: artistData.newArtistName,
-        management: artistData.newArtistManagement,
-        email: artistData.newArtistEmail,
-        completed: false 
-      });
-      setArtists([...artists, response.data]);      
-    } catch (error) {
-      console.error('Error adding new Artist:', error);
-    }
-  };
-
-  const deleteArtist = async (artistId) => {
-    try {
-      await axios.delete(`http://localhost:8080/artists/${artistId}`);
-      setArtists(artists.filter(artist => artist.id !== artistId));
-    } catch (error) {
-      console.error('Error deleting task:', error);
-    }
-  };
   
   return (
     <div className="App">
@@ -146,16 +108,20 @@ function App() {
   
 
       {isLoggedIn ? (
+        <Router>
         <div>
           <h1>Welcome, {username}!</h1>
           <h1>Artist Manager</h1>
           <div>
-            <ArtistList artists={artists} onDelete={deleteArtist} />
-            <ArtistForm onSubmit={addArtist} />
+            <Routes>
+              <Route path="/" element={<Artist /> } />
+            </Routes>
 
+            
             <Button onClick={handleLogout}>Logout</Button>
           </div>
         </div>
+        </Router>
       ) : (
         <div>
           <h1>Login</h1>
