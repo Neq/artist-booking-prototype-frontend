@@ -4,7 +4,8 @@ import axios from 'axios';
 
 function ArtistRequest() {
     const [artistRequests, setArtistRequests] = useState([]);
-    const [newRequest, setNewRequest] = useState({
+    const [artists, setArtists] = useState([]);
+    const [newRequest, setNewRequest] = useState({        
         artistId: '',
         eventStart: '',
         eventEnd: '',
@@ -13,8 +14,19 @@ function ArtistRequest() {
     const [editRequest, setEditRequest] = useState(null);
 
     useEffect(() => {
+        fetchArtists();
         fetchArtistRequests();
     }, []);
+
+    const fetchArtists = async () => {
+        try {
+            const response = await axios.get('http://localhost:8080/artists');
+            setArtists(response.data);
+        } catch (error) {
+            console.error('Error fetching artists:', error);
+        }
+    };
+
 
     const fetchArtistRequests = async () => {
         try {
@@ -29,7 +41,7 @@ function ArtistRequest() {
         try {
             await axios.post('http://localhost:8080/artistRequests', newRequest);
             fetchArtistRequests();
-            setNewRequest({
+            setNewRequest({                
                 artistId: '',
                 eventStart: '',
                 eventEnd: '',
@@ -81,8 +93,16 @@ function ArtistRequest() {
         <div>
             <h2>Artist Requests</h2>
             <div>
-                <h3>Create Request</h3>
-                <input type="text" name="artistId" placeholder="Artist ID" value={newRequest.artistId} onChange={handleInputChange} />
+                <h3>Create Request</h3>      
+                <label>
+        Artist:
+        <select name="artistId" value={newRequest.artistId} onChange={handleInputChange}>
+          <option value="">Select Artist</option>
+          {artists.map(artist => (
+            <option key={artist.id} value={artist.id}>{artist.name}</option>
+          ))}
+        </select>
+      </label>          
                 <input type="text" name="eventStart" placeholder="Event Start" value={newRequest.eventStart} onChange={handleInputChange} />
                 <input type="text" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} />
                 <input type="text" name="details" placeholder="Details" value={newRequest.details} onChange={handleInputChange} />
