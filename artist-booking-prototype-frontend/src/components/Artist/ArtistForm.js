@@ -9,16 +9,20 @@ function TaskForm({ onSubmit }) {
   const [newArtistCountry, setNewArtistCountry] = useState('');
   const [newArtistAddress, setNewArtistAddress] = useState('');
   const [newArtistZipCode, setNewArtistZipCode] = useState('');
+  const [newArtistFirstname, setNewArtistFirstname] = useState('');
+  const [newArtistLastname, setNewArtistLastname] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ newArtistName, newArtistManagement, newArtistEmail });
+    onSubmit({ newArtistName, newArtistManagement, newArtistEmail, newArtistAddress, newArtistZipCode, newArtistCountry, newArtistFirstname, newArtistLastname });
     setNewArtistName('');
     setNewArtistManagement('');
     setNewArtistEmail('');
     setNewArtistCountry('');
     setNewArtistAddress('');
     setNewArtistZipCode('');
+    setNewArtistFirstname('');
+    setNewArtistLastname('');
   };
 
   return (
@@ -58,6 +62,18 @@ function TaskForm({ onSubmit }) {
               placeholder="Artist zip code"
               value={newArtistZipCode}
               onChange={(e) => setNewArtistZipCode(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Artist firstname"
+              value={newArtistFirstname}
+              onChange={(e) => setNewArtistFirstname(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Artist lastname"
+              value={newArtistLastname}
+              onChange={(e) => setNewArtistLastname(e.target.value)}
             />
             <Button type="submit">K&uuml;stler hinzuf&uuml;gen</Button>      
     </form>

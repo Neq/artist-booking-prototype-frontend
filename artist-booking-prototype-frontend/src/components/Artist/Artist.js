@@ -24,7 +24,11 @@ function Artist() {
             name: artistData.newArtistName,
             management: artistData.newArtistManagement,
             email: artistData.newArtistEmail,
-            completed: false 
+            country: artistData.newArtistCountry,
+            address: artistData.newArtistAddress,
+            zipCode: artistData.newArtistZipCode,
+            firstname: artistData.newArtistFirstname,
+            lastname: artistData.newArtistLastname
         });
         setArtists([...artists, response.data]);      
         } catch (error) {
@@ -34,10 +38,10 @@ function Artist() {
 
     const deleteArtist = async (artistId) => {
         try {
-        await axios.delete(`http://localhost:8080/artists/${artistId}`);
-        setArtists(artists.filter(artist => artist.id !== artistId));
+            await axios.delete(`http://localhost:8080/artists/${artistId}`);
+            setArtists(artists.filter(artist => artist.id !== artistId));
         } catch (error) {
-        console.error('Error deleting task:', error);
+            console.error('Error deleting task:', error);
         }
     };
 
