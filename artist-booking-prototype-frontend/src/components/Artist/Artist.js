@@ -12,7 +12,7 @@ function Artist() {
     const fetchArtists = async () => {
         try {
         const response = await axios.get('http://localhost:8080/artists');
-        setArtists(response.data._embedded.artistList);
+        setArtists(response.data);
         } catch (error) {
         console.error('Error fetching tasks:', error);
         }
@@ -45,7 +45,7 @@ function Artist() {
         fetchArtists();
       }, []);
 
-    return (<div><h1>asdf</h1><ArtistList artists={artists} onDelete={deleteArtist} />
+    return (<div><ArtistList artists={artists} onDelete={deleteArtist} />
     <ArtistForm onSubmit={addArtist} /></div>)
 }
 

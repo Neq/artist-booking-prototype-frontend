@@ -6,6 +6,9 @@ function TaskForm({ onSubmit }) {
   const [newArtistName, setNewArtistName] = useState('');
   const [newArtistManagement, setNewArtistManagement] = useState('');
   const [newArtistEmail, setNewArtistEmail] = useState('');
+  const [newArtistCountry, setNewArtistCountry] = useState('');
+  const [newArtistAddress, setNewArtistAddress] = useState('');
+  const [newArtistZipCode, setNewArtistZipCode] = useState('');
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -13,6 +16,9 @@ function TaskForm({ onSubmit }) {
     setNewArtistName('');
     setNewArtistManagement('');
     setNewArtistEmail('');
+    setNewArtistCountry('');
+    setNewArtistAddress('');
+    setNewArtistZipCode('');
   };
 
   return (
@@ -35,7 +41,25 @@ function TaskForm({ onSubmit }) {
               value={newArtistEmail}
               onChange={(e) => setNewArtistEmail(e.target.value)}
             />
-            <Button type="submit">Add Artist</Button>      
+            <input
+              type="text"
+              placeholder="Artist country"
+              value={newArtistCountry}
+              onChange={(e) => setNewArtistCountry(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Artist address"
+              value={newArtistAddress}
+              onChange={(e) => setNewArtistAddress(e.target.value)}
+            />
+            <input
+              type="text"
+              placeholder="Artist zip code"
+              value={newArtistZipCode}
+              onChange={(e) => setNewArtistZipCode(e.target.value)}
+            />
+            <Button type="submit">K&uuml;stler hinzuf&uuml;gen</Button>      
     </form>
   );
 }

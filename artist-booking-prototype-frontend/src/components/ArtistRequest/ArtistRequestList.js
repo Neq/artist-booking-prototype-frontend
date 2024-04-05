@@ -39,16 +39,16 @@
 
 // ArtistList.js
 import React from 'react';
-import ArtistItem from './ArtistRequestItem';
+import ArtistRequestItem from './ArtistRequestItem';
 
-function ArtistList({ artists, onDelete }) {
+function ArtistRequestList({ artistRequests, onDelete }) {
   return (
     <ul>
-      {artists.map(artist => (
-        <ArtistItem key={artist.id} artist={artist} onDelete={onDelete} />
+      {artistRequests.map(artistRequest => (
+        <ArtistRequestItem key={artistRequest.id} artistRequest={artistRequest} onDelete={onDelete} />
       ))}
     </ul>
   );
 }
 
-export default ArtistList;
+export default ArtistRequestList;
