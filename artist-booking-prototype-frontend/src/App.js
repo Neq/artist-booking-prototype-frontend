@@ -6,6 +6,7 @@ import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import Artist from './components/Artist/Artist';
 import ArtistRequest from './components/ArtistRequest/ArtistRequest';
 import ContractTemplate from './components/ContractTemplate/ContractTemplate';
+import Calendar from './components/Calendar/Calendar';
 
 
 function App() {
@@ -90,7 +91,7 @@ function App() {
         </a>
       </li>
       <li className="nav-item">
-        <a className="nav-link" href="#">
+        <a className="nav-link" href="/calendar">
           <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" className="feather feather-bar-chart-2"><line x1="18" y1="20" x2="18" y2="10"></line><line x1="12" y1="20" x2="12" y2="4"></line><line x1="6" y1="20" x2="6" y2="14"></line></svg>
           <span className="ml-2">Kalender</span>
         </a>
@@ -113,6 +114,7 @@ function App() {
               <Route path="/" element={<Artist /> } />
               <Route path="/artistRequests" element={<ArtistRequest /> } />
               <Route path="/contractTemplates" element={<ContractTemplate /> } />
+              <Route path="/calendar" element={<Calendar /> } />
             </Routes>
 
             
