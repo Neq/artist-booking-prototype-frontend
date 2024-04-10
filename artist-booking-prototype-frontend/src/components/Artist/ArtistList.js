@@ -46,14 +46,9 @@ function ArtistList({ artists, onDelete }) {
 
     <div class="col-12 col-xl-8 mb-4 mb-lg-0">
                         <div class="card">
-                            <h5 class="card-header">Latest transactions</h5>
+                            <h5 class="card-header">K&uuml;stler</h5>
                             <div class="card-body">
-                                <div class="table-responsive">
-                                <ul>
-      {artists.map(artist => (
-        <ArtistItem key={artist.id} artist={artist} onDelete={onDelete} />
-      ))}
-    </ul>
+                                <div class="table-responsive">                                
                                     <table class="table">
                                         <thead>
                                           <tr>
@@ -67,64 +62,16 @@ function ArtistList({ artists, onDelete }) {
                                         <tbody>
                                           {artists.map(artist => (
                                             <tr>
-                                            <th scope="row">17371705</th>
-                                            <td>{artist.name}</td>
+                                            <th scope="row">{artist.name}</th>                                            
                                             <td>{artist.management}</td>
                                             <td>{artist.email}</td>
                                             <td>{artist.country}</td>
-                                            <td>{artist.address}</td>                                            
+                                            <td>{artist.address}</td>
+                                            <td>{artist.contractTemplateId}</td>
                                             <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
                                             <button onClick={() => onDelete(artist.id)}>L&ouml;schen</button>
                                           </tr>
-                                          ))}
-                                          <tr>
-                                            <th scope="row">17371705</th>
-                                            <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                            <td>johndoe@gmail.com</td>
-                                            <td>€61.11</td>
-                                            <td>Aug 31 2020</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">17370540</th>
-                                            <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                            <td>jacob.monroe@company.com</td>
-                                            <td>$153.11</td>
-                                            <td>Aug 28 2020</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">17371705</th>
-                                            <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                            <td>johndoe@gmail.com</td>
-                                            <td>€61.11</td>
-                                            <td>Aug 31 2020</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">17370540</th>
-                                            <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                            <td>jacob.monroe@company.com</td>
-                                            <td>$153.11</td>
-                                            <td>Aug 28 2020</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">17371705</th>
-                                            <td>Volt Premium Bootstrap 5 Dashboard</td>
-                                            <td>johndoe@gmail.com</td>
-                                            <td>€61.11</td>
-                                            <td>Aug 31 2020</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                          </tr>
-                                          <tr>
-                                            <th scope="row">17370540</th>
-                                            <td>Pixel Pro Premium Bootstrap UI Kit</td>
-                                            <td>jacob.monroe@company.com</td>
-                                            <td>$153.11</td>
-                                            <td>Aug 28 2020</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                          </tr>
+                                          ))}                                         
                                         </tbody>
                                       </table>
                                 </div>

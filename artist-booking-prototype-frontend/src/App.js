@@ -37,10 +37,7 @@ function App() {
             <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        </div>
-        <div class="col-12 col-md-4 col-lg-2">
-            <input class="form-control form-control-dark" type="text" placeholder="Search" aria-label="Search" />
-        </div>
+        </div>        
         <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
             <div class="mr-3 mt-1">
                 <a class="github-button" href="https://github.com/themesberg/simple-bootstrap-5-dashboard" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">Star</a>
@@ -95,13 +92,7 @@ function App() {
                       </ul>
                 </div>
             </nav>
-            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">
-                <nav aria-label="breadcrumb">
-                    <ol class="breadcrumb">
-                        <li class="breadcrumb-item"><a href="#">Home</a></li>
-                        <li class="breadcrumb-item active" aria-current="page">Overview</li>
-                    </ol>
-                </nav>
+            <main class="col-md-9 ml-sm-auto col-lg-10 px-md-4 py-4">                
                 <h1 class="h2">Dashboard</h1>
 
                 {isLoggedIn ? (
@@ -269,7 +260,7 @@ function App() {
                     </div>
                 </div>
                 <footer class="pt-5 d-flex justify-content-between">
-                    <span>Copyright © 2019-2020 <a href="https://themesberg.com">Themesberg</a></span>
+                    <span></span>
                     <ul class="nav m-0">
                         <li class="nav-item">
                           <a class="nav-link text-secondary" aria-current="page" href="#">Privacy Policy</a>
