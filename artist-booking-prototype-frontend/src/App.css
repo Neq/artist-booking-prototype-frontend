@@ -35,3 +35,9 @@
 .sidebar .nav-link.active {
   color: #0d6efd;
 }
+
+.wof-logo {
+  height: 50px; 
+  width: 300px; 
+  background-color: black;
+}
