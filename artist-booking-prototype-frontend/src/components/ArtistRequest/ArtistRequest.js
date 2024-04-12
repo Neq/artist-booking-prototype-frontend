@@ -11,11 +11,13 @@ function ArtistRequest() {
         eventEnd: '',
         details: ''
     });
+    const [offerStatus, setOfferStatus] = useState([])
     const [editRequest, setEditRequest] = useState(null);
 
     useEffect(() => {
+        fetchOfferStatus();
         fetchArtists();
-        fetchArtistRequests();
+        fetchArtistRequests();        
     }, []);
 
     const fetchArtists = async () => {
@@ -36,6 +38,15 @@ function ArtistRequest() {
             console.error('Error fetching artist requests:', error);
         }
     };
+
+    const fetchOfferStatus = async() => {
+        try {
+            const response = await axios.get('http://localhost:8080/offerStatus');
+            setOfferStatus(response.data);
+        } catch (error) {
+            console.error('Error fetching offerStatus:', error);
+        }
+    }
 
     const createArtistRequest = async () => {
         try {
@@ -127,6 +138,9 @@ function ArtistRequest() {
                             <td>{request.eventStart}</td>
                             <td>{request.eventEnd}</td>
                             <td>{request.details}</td>
+                            <td>{offerStatus[request.offerStatusId].color}
+                                
+                            </td>
                             <td>
                                 {editRequest && editRequest.id === request.id ? (
                                     <div>

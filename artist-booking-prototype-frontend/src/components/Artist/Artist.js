@@ -7,8 +7,7 @@ import ArtistForm from './ArtistForm';
 function Artist() {
 
     const [artists, setArtists] = useState([]);
-
-
+    
     const fetchArtists = async () => {
         try {
             const response = await axios.get('http://localhost:8080/artists');
@@ -46,11 +45,15 @@ function Artist() {
         }
     };
 
+    const editArtist = async (artistData) => {
+        
+    };
+
     useEffect(() => {
         fetchArtists();
       }, []);
 
-    return (<div><ArtistList artists={artists} onDelete={deleteArtist} />
+    return (<div><ArtistList artists={artists} onDelete={deleteArtist} onEdit={editArtist} />
     <ArtistForm onSubmit={addArtist} /></div>)
 }
 

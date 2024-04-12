@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 
 function ArtistForm({ onSubmit }) {
+  const [newArtistId, setNewArtistId] = useState('');
   const [newArtistName, setNewArtistName] = useState('');
   const [newArtistManagement, setNewArtistManagement] = useState('');
   const [newArtistEmail, setNewArtistEmail] = useState('');
@@ -29,6 +30,10 @@ function ArtistForm({ onSubmit }) {
     setNewArtistContractTemplateId('');
   };
 
+  const handleEdit = (e) => {
+    
+  }
+
   useEffect(() => {        
     fetchContractTemplates();
   }, []);
@@ -43,6 +48,11 @@ function ArtistForm({ onSubmit }) {
   };
 
   return (
+    <div class="row">
+    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="card">
+      <h5 class="card-header">K&uuml;stler hinzuf&uuml;gen</h5>
+      <div class="card-body">
     <form class="row g-3" onSubmit={handleSubmit}>
       <div class="col-md-6">
         <label for="newArtistContractTemplateId" class="form-label">Vertragsvorlage</label>
@@ -138,6 +148,10 @@ function ArtistForm({ onSubmit }) {
             <button class="btn btn-primary" type="submit">K&uuml;stler hinzuf&uuml;gen</button>      
       </div>
     </form>
+    </div>
+    </div>
+    </div>
+    </div>
   );
 }
 

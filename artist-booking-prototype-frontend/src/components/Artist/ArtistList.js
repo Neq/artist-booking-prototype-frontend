@@ -41,9 +41,9 @@
 import React from 'react';
 import ArtistItem from './ArtistItem';
 
-function ArtistList({ artists, onDelete }) {
+function ArtistList({ artists, onDelete, onEdit }) {
   return (
-
+    <div class="row my-4">
     <div class="col-12 col-xl-8 mb-4 mb-lg-0">
                         <div class="card">
                             <h5 class="card-header">K&uuml;stler</h5>
@@ -68,8 +68,8 @@ function ArtistList({ artists, onDelete }) {
                                             <td>{artist.country}</td>
                                             <td>{artist.address}</td>
                                             <td>{artist.contractTemplateId}</td>
-                                            <td><a href="#" class="btn btn-sm btn-primary">View</a></td>
-                                            <button onClick={() => onDelete(artist.id)}>L&ouml;schen</button>
+                                            <td><a href="#" class="btn btn-sm btn-primary" onClick={() => onEdit(artist)}>Bearbeiten</a>
+                                            <a href="#" class="btn btn-sm btn-primary" onClick={() => onDelete(artist.id)}>L&ouml;schen</a></td>
                                           </tr>
                                           ))}                                         
                                         </tbody>
@@ -79,6 +79,7 @@ function ArtistList({ artists, onDelete }) {
                             </div>
                         </div>
                     </div>    
+                    </div>
   );
 }
 

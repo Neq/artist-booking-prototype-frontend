@@ -7,9 +7,11 @@ import dayGridPlugin from '@fullcalendar/daygrid' // a plugin!
 export default function Calendar() {
 
     const [artistEvents, setArtistEvents] = useState({});
+    const [offerStatus, setOfferStatus] = useState([]);
     const calendarRef = useRef(null);
 
     useEffect(() => {
+        fetchOfferStatus();
         fetchArtistEvents();        
       }, []);
 
@@ -62,6 +64,15 @@ export default function Calendar() {
         }        
     };
 
+    const fetchOfferStatus = async() => {
+        try {
+            const response = await axios.get('http://localhost:8080/offerStatus');
+            setOfferStatus(response.data);
+        } catch (error) {
+            console.error('Error fetching offerStatus:', error);
+        }
+    }
+
     const fetchCalendarEvents = () => {        
         
         console.log("calendarEvents - artistEvents: "+artistEvents);
@@ -71,12 +82,13 @@ export default function Calendar() {
     }
 
     function renderEventContent(eventInfo) {
+        console.log(eventInfo);
         return(
-          <>
-            <div style={{backgroundColor: 'red'}}>
+          <>          
+            
             <b>{eventInfo.timeText}</b>
             <i>{eventInfo.event.title} {eventInfo.event.id}</i>
-            </div>
+            
           </>
         )
       }
@@ -84,6 +96,7 @@ export default function Calendar() {
     return (
         <FullCalendar
         plugins={[ dayGridPlugin ]}
+        locale="deLocale"
         ref={calendarRef}
         eventSources={artistEvents}
         initialView="dayGridMonth"  
