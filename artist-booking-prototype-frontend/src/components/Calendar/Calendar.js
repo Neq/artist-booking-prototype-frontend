@@ -85,10 +85,10 @@ export default function Calendar() {
         console.log(eventInfo);
         return(
           <>          
-            
-            <b>{eventInfo.timeText}</b>
-            <i>{eventInfo.event.title} {eventInfo.event.id}</i>
-            
+            <div style={{backgroundColor: eventInfo.backgroundColor}}>
+              <b>{eventInfo.timeText}</b>
+              <i>{eventInfo.event.title} {eventInfo.event.id}</i>
+            </div>
           </>
         )
       }

@@ -9,16 +9,13 @@ function ArtistRequest() {
         artistId: '',
         eventStart: '',
         eventEnd: '',
-        details: ''
+        notes: '',
+        offerStatusId: '',
+        locationName: '',
+        locationWebsite: ''
     });
     const [offerStatus, setOfferStatus] = useState([])
     const [editRequest, setEditRequest] = useState(null);
-
-    useEffect(() => {
-        fetchOfferStatus();
-        fetchArtists();
-        fetchArtistRequests();        
-    }, []);
 
     const fetchArtists = async () => {
         try {
@@ -48,7 +45,7 @@ function ArtistRequest() {
         }
     }
 
-    const createArtistRequest = async () => {
+    const createArtistRequest = async () => {        
         try {
             await axios.post('http://localhost:8080/artistRequests', newRequest);
             fetchArtistRequests();
@@ -56,7 +53,10 @@ function ArtistRequest() {
                 artistId: '',
                 eventStart: '',
                 eventEnd: '',
-                details: ''
+                notes: '',
+                offerStatusId: '',
+                locationName: '',
+                locationWebsite: ''
             });
         } catch (error) {
             console.error('Error creating artist request:', error);
@@ -82,6 +82,16 @@ function ArtistRequest() {
         }
     };
 
+    const handleSubmit = (e) => {
+        e.preventDefault();
+        createArtistRequest();
+      };
+
+    const handleEditSubmit = (e) => {
+        e.preventDefault();
+        updateArtistRequest();
+    }
+
     const handleInputChange = (event) => {
         const { name, value } = event.target;
         setNewRequest({ ...newRequest, [name]: value });
@@ -100,47 +110,152 @@ function ArtistRequest() {
         setEditRequest(null);
     };
 
+    useEffect(() => {
+        fetchOfferStatus();
+        fetchArtists();
+        fetchArtistRequests();        
+    }, []);
+    
     return (
-        <div>
-            <h2>Artist Requests</h2>
-            <div>
-                <h3>Create Request</h3>      
-                <label>
-        Artist:
-        <select name="artistId" value={newRequest.artistId} onChange={handleInputChange}>
-          <option value="">Select Artist</option>
-          {artists.map(artist => (
-            <option key={artist.id} value={artist.id}>{artist.name}</option>
-          ))}
-        </select>
-      </label>          
-                <input type="text" name="eventStart" placeholder="Event Start" value={newRequest.eventStart} onChange={handleInputChange} />
-                <input type="text" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} />
-                <input type="text" name="details" placeholder="Details" value={newRequest.details} onChange={handleInputChange} />
-                <button onClick={createArtistRequest}>Create</button>
+            <div class="row">
+    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="card">
+      <h5 class="card-header">K&uuml;stleranfragen</h5>
+      <div class="card-body">
+        {editRequest == null ? ( 
+            <form class="row g-3" onSubmit={handleSubmit}>
+                <div class="col-md-6">                     
+                    <label for="newRequestArtistId" class="form-label">K&uuml;nstler</label>                
+                    <select class="form-select" id="newRequestArtistId" name="artistId" value={newRequest.artistId} onChange={handleInputChange}>
+                    <option value="">K&uuml;stler ausw&auml;hlen</option>
+                    {artists.map(artist => (
+                        <option key={artist.id} value={artist.id}>{artist.name}</option>
+                    ))}
+                    </select>
+                </div>
+                <div class="col-md-6">        
+                    <label for="newRequestOfferStatusId" class="form-label">Status</label>                
+                    <select class="form-select" id="newRequestOfferStatusId" name="offerStatusId" value={newRequest.offerStatusId} onChange={handleInputChange}>
+                    <option value="">Status</option>
+                    {offerStatus.map(offerStatusItem => (
+                        <option key={offerStatusItem.id} value={offerStatusItem.id}>{offerStatusItem.status}</option>
+                    ))}
+                    </select>      
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestEventStart" class="form-label">Event Start</label>                
+                    <input class="form-control" type="text" name="eventStart" placeholder="Event Start" value={newRequest.eventStart} onChange={handleInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestEventEnd" class="form-label">Event End</label>                
+                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestEventEnd" class="form-label">Event End</label>                
+                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestNotes" class="form-label">Notizen</label>                
+                    <textarea class="form-control" type="text" name="notes" placeholder="Notes" value={newRequest.notes} onChange={handleInputChange} />
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestLocationName" class="form-label">Location Name</label>                
+                    <input class="form-control" type="text" name="locationName" placeholder="Name der Location" value={newRequest.locationName} onChange={handleInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestLocationWebsite" class="form-label">Location Website</label>                
+                    <input class="form-control" type="text" name="locationWebsite" placeholder="Website der Location" value={newRequest.locationWebsite} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">Hinzuf&uuml;gen</button>
+                </div>
+            </form>
+        ) : (
+            <form class="row g-3" onSubmit={handleEditSubmit}>
+                <div class="col-md-6">                     
+                    <label for="editRequestArtistId" class="form-label">K&uuml;nstler</label>                
+                    <select class="form-select" id="editRequestArtistId" name="artistId" value={editRequest.artistId} onChange={handleEditInputChange}>
+                    <option value="">K&uuml;stler editieren</option>
+                    {artists.map(artist => (
+                        <option key={artist.id} value={artist.id}>{artist.name}</option>
+                    ))}
+                    </select>
+                </div>
+                <div class="col-md-6">        
+                    <label for="editRequestOfferStatusId" class="form-label">Status</label>                
+                    <select class="form-select" id="editRequestOfferStatusId" name="offerStatusId" value={editRequest.offerStatusId} onChange={handleEditInputChange}>
+                    <option value="">Status</option>
+                    {offerStatus.map(offerStatusItem => (
+                        <option key={offerStatusItem.id} value={offerStatusItem.id}>{offerStatusItem.status}</option>
+                    ))}
+                    </select>      
+                </div>
+                <div class="col-md-6">
+                    <label for="editRequestEventStart" class="form-label">Event Start</label>                
+                    <input class="form-control" type="text" name="eventStart" placeholder="Event Start" value={editRequest.eventStart} onChange={handleEditInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="editRequestEventEnd" class="form-label">Event End</label>                
+                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={editRequest.eventEnd} onChange={handleEditInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="editRequestEventEnd" class="form-label">Event End</label>                
+                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={editRequest.eventEnd} onChange={handleEditInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="editRequestNotes" class="form-label">Notizen</label>                
+                    <textarea class="form-control" type="text" name="notes" placeholder="Notes" value={editRequest.notes} onChange={handleEditInputChange} />
+                </div>
+                <div class="col-md-6">
+                    <label for="editRequestLocationName" class="form-label">Location Name</label>                
+                    <input class="form-control" type="text" name="locationName" placeholder="Name der Location" value={editRequest.locationName} onChange={handleEditInputChange} required />
+                </div>
+                <div class="col-md-6">
+                    <label for="editRequestLocationWebsite" class="form-label">Location Website</label>                
+                    <input class="form-control" type="text" name="locationWebsite" placeholder="Website der Location" value={editRequest.locationWebsite} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-12">
+                    <button class="btn btn-primary" type="submit">&Auml;nderungen speichern</button>
+                </div>
+            </form>
+        )}
+        </div>                     
+
+                
             </div>
-            <table>
-                <thead>
+            
+            <div class="row my-4">
+            <div class="col-12">
+                        <div class="card">
+                            <h5 class="card-header">K&uuml;stler</h5>
+                            <div class="card-body">
+                                <div class="table-responsive">                                
+                                    <table class="table">
+                                        <thead>
+    
                     <tr>
                         <th>ID</th>
-                        <th>Artist ID</th>
+                        <th>K&uuml;stler</th>
                         <th>Event Start</th>
                         <th>Event End</th>
-                        <th>Details</th>
-                        <th>Actions</th>
+                        <th>Notizen</th>                        
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Location Website</th>
                     </tr>
                 </thead>
                 <tbody>
                     {artistRequests.map(request => (
                         <tr key={request.id}>
                             <td>{request.id}</td>
-                            <td>{request.artistId}</td>
+                            <td>{artists.find(obj => obj.id === request.artistId).name}</td>
                             <td>{request.eventStart}</td>
                             <td>{request.eventEnd}</td>
-                            <td>{request.details}</td>
-                            <td>{offerStatus[request.offerStatusId].color}
-                                
-                            </td>
+                            <td>{request.notes}</td>
+                            <td>{offerStatus[request.offerStatusId-1].status}</td>
+                            <td>{request.locationName}</td>
+                            <td>{request.locationWebsite}</td>
+                            
                             <td>
                                 {editRequest && editRequest.id === request.id ? (
                                     <div>
@@ -158,6 +273,12 @@ function ArtistRequest() {
                     ))}
                 </tbody>
             </table>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
         </div>
     );
 }
