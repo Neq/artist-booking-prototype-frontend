@@ -12,13 +12,15 @@ function ArtistForm({ onSubmit }) {
   const [newArtistZipCode, setNewArtistZipCode] = useState('');
   const [newArtistFirstname, setNewArtistFirstname] = useState('');
   const [newArtistLastname, setNewArtistLastname] = useState('');
+  const [newArtistPhone, setNewArtistPhone] = useState('');
   const [newArtistContractTemplateId, setNewArtistContractTemplateId] = useState('');
+
 
   const [contractTemplates, setContractTemplates] = useState([]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ newArtistName, newArtistManagement, newArtistEmail, newArtistAddress, newArtistZipCode, newArtistCountry, newArtistFirstname, newArtistLastname, newArtistContractTemplateId});
+    onSubmit({ newArtistName, newArtistManagement, newArtistEmail, newArtistAddress, newArtistZipCode, newArtistCountry, newArtistFirstname, newArtistLastname, newArtistPhone, newArtistContractTemplateId});
     setNewArtistName('');
     setNewArtistManagement('');
     setNewArtistEmail('');
@@ -28,6 +30,7 @@ function ArtistForm({ onSubmit }) {
     setNewArtistFirstname('');
     setNewArtistLastname('');
     setNewArtistContractTemplateId('');
+    setNewArtistPhone('');
   };
 
   const handleEdit = (e) => {
@@ -123,6 +126,16 @@ function ArtistForm({ onSubmit }) {
               onChange={(e) => setNewArtistZipCode(e.target.value)}
               required
             />
+      </div>
+      <div class="col-md-6">
+            <label for="newArtistPhone" class="form-label">Telefon</label>
+            <input class="form-control"
+              type="text"
+              placeholder="Telefonnummer"
+              value={newArtistPhone}
+              onChange={(e) => setNewArtistPhone(e.target.value)}
+              required
+            />      
       </div>
       <div class="col-md-6">
             <label for="newArtistFirstname" class="form-label">Vorname</label>

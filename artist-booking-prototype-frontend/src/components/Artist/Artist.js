@@ -28,6 +28,7 @@ function Artist() {
                 zipCode: artistData.newArtistZipCode,
                 firstname: artistData.newArtistFirstname,
                 lastname: artistData.newArtistLastname,
+                phone: artistData.newArtistPhone,
                 contractTemplateId: artistData.newArtistContractTemplateId
             });
             setArtists([...artists, response.data]);      
