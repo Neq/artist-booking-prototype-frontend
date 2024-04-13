@@ -22,6 +22,8 @@ function Artist() {
             const response = await axios.post('http://localhost:8080/artists', {
                 name: artistData.newArtistName,
                 management: artistData.newArtistManagement,
+                managemeentEmail: artistData.newArtistManagementEmail,
+                managementPhone: artistData.newArtistManagementPhone,
                 email: artistData.newArtistEmail,
                 country: artistData.newArtistCountry,
                 address: artistData.newArtistAddress,

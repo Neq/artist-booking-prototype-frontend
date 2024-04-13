@@ -6,6 +6,8 @@ function ArtistForm({ onSubmit }) {
   const [newArtistId, setNewArtistId] = useState('');
   const [newArtistName, setNewArtistName] = useState('');
   const [newArtistManagement, setNewArtistManagement] = useState('');
+  const [newArtistManagementEmail, setNewArtistManagementEmail] = useState('');
+  const [newArtistManagementPhone, setNewArtistManagementPhone] = useState('');
   const [newArtistEmail, setNewArtistEmail] = useState('');
   const [newArtistCountry, setNewArtistCountry] = useState('');
   const [newArtistAddress, setNewArtistAddress] = useState('');
@@ -20,7 +22,7 @@ function ArtistForm({ onSubmit }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit({ newArtistName, newArtistManagement, newArtistEmail, newArtistAddress, newArtistZipCode, newArtistCountry, newArtistFirstname, newArtistLastname, newArtistPhone, newArtistContractTemplateId});
+    onSubmit({ newArtistName, newArtistManagement, newArtistManagementEmail, newArtistManagementPhone, newArtistEmail, newArtistAddress, newArtistZipCode, newArtistCountry, newArtistFirstname, newArtistLastname, newArtistPhone, newArtistContractTemplateId});
     setNewArtistName('');
     setNewArtistManagement('');
     setNewArtistEmail('');
@@ -84,6 +86,28 @@ function ArtistForm({ onSubmit }) {
               placeholder="Enter artist management"
               value={newArtistManagement}
               onChange={(e) => setNewArtistManagement(e.target.value)}
+              required
+            />
+      </div>
+      <div class="col-md-6">
+            <label for="newArtistManagementEmail" class="form-label">Management Email</label>
+            <input id="newArtistManagementEmail"
+              class="form-control"
+              type="text"
+              placeholder="Enter artist management"
+              value={newArtistManagementEmail}
+              onChange={(e) => setNewArtistManagementEmail(e.target.value)}
+              required
+            />
+      </div>
+      <div class="col-md-6">
+            <label for="newArtistManagementPhone" class="form-label">Management Telefon</label>
+            <input id="newArtistManagementPhone"
+              class="form-control"
+              type="text"
+              placeholder="Enter artist management"
+              value={newArtistManagementPhone}
+              onChange={(e) => setNewArtistManagementPhone(e.target.value)}
               required
             />
       </div>
