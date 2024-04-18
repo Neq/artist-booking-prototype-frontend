@@ -119,8 +119,64 @@ function ArtistRequest() {
     return (
             <div class="row">
     <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="row my-4">
+            <div class="col-12">
+                        <div class="card">
+                            <h5 class="card-header">K&uuml;stleranfragen</h5>
+                            <div class="card-body">
+                                <div class="table-responsive">                                
+                                    <table class="table">
+                                        <thead>
+    
+                    <tr>
+                        <th>ID</th>
+                        <th>K&uuml;stler</th>
+                        <th>Event Start</th>
+                        <th>Event End</th>
+                        <th>Notizen</th>                        
+                        <th>Status</th>
+                        <th>Location</th>
+                        <th>Location Website</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    {artistRequests.map(request => (
+                        <tr key={request.id}>
+                            <td>{request.id}</td>
+                            <td>{artists.find(obj => obj.id === request.artistId).name}</td>
+                            <td>{request.eventStart}</td>
+                            <td>{request.eventEnd}</td>
+                            <td>{request.notes}</td>
+                            <td>{offerStatus[request.offerStatusId-1].status}</td>
+                            <td>{request.locationName}</td>
+                            <td>{request.locationWebsite}</td>
+                            
+                            <td>
+                                {editRequest && editRequest.id === request.id ? (
+                                    <div>
+                                        <button onClick={updateArtistRequest}>Save</button>
+                                        <button onClick={handleCancelEdit}>Cancel</button>
+                                    </div>
+                                ) : (
+                                    <div>
+                                        <button onClick={() => handleEditClick(request)}>Edit</button>
+                                        <button onClick={() => deleteArtistRequest(request.id)}>Delete</button>
+                                    </div>
+                                )}
+                            </td>
+                        </tr>
+                    ))}
+                </tbody>
+            </table>
+            </div>
+            </div>
+            </div>
+            </div>
+            </div>
+
+
     <div class="card">
-      <h5 class="card-header">K&uuml;stleranfragen</h5>
+      <h5 class="card-header">K&uuml;stleranfragen hinzuf&uuml;gen</h5>
       <div class="card-body">
         {editRequest == null ? ( 
             <form class="row g-3" onSubmit={handleSubmit}>
@@ -224,60 +280,7 @@ function ArtistRequest() {
                 
             </div>
             
-            <div class="row my-4">
-            <div class="col-12">
-                        <div class="card">
-                            <h5 class="card-header">K&uuml;stler</h5>
-                            <div class="card-body">
-                                <div class="table-responsive">                                
-                                    <table class="table">
-                                        <thead>
-    
-                    <tr>
-                        <th>ID</th>
-                        <th>K&uuml;stler</th>
-                        <th>Event Start</th>
-                        <th>Event End</th>
-                        <th>Notizen</th>                        
-                        <th>Status</th>
-                        <th>Location</th>
-                        <th>Location Website</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {artistRequests.map(request => (
-                        <tr key={request.id}>
-                            <td>{request.id}</td>
-                            <td>{artists.find(obj => obj.id === request.artistId).name}</td>
-                            <td>{request.eventStart}</td>
-                            <td>{request.eventEnd}</td>
-                            <td>{request.notes}</td>
-                            <td>{offerStatus[request.offerStatusId-1].status}</td>
-                            <td>{request.locationName}</td>
-                            <td>{request.locationWebsite}</td>
-                            
-                            <td>
-                                {editRequest && editRequest.id === request.id ? (
-                                    <div>
-                                        <button onClick={updateArtistRequest}>Save</button>
-                                        <button onClick={handleCancelEdit}>Cancel</button>
-                                    </div>
-                                ) : (
-                                    <div>
-                                        <button onClick={() => handleEditClick(request)}>Edit</button>
-                                        <button onClick={() => deleteArtistRequest(request.id)}>Delete</button>
-                                    </div>
-                                )}
-                            </td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-            </div>
-            </div>
-            </div>
-            </div>
-            </div>
+            
             </div>
         </div>
     );

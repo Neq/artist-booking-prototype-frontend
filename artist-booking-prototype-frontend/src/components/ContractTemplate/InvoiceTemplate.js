@@ -2,97 +2,94 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import CodeEditor from '@uiw/react-textarea-code-editor';
-import InvoiceTemplate from './InvoiceTemplate';
 
-function ContractTemplate() {    
-    const [contractTemplates, setContractTemplates] = useState([]);
-    const [newContractTemplate, setNewContractTemplate] = useState({        
+function InvoiceTemplate() {    
+    const [invoiceTemplates, setInvoiceTemplates] = useState([]);
+    const [newInvoiceTemplate, setNewInvoiceTemplate] = useState({        
         name: '',
         template: ''
     });
-    const [editContractTemplate, setEditContractTemplate]= useState(null);    
+    const [editInvoiceTemplate, setEditInvoiceTemplate]= useState(null);    
 
     useEffect(() => {        
-        fetchContractTemplates();
+        fetchInvoiceTemplates();
     }, []);
     
-    const fetchContractTemplates = async () => {
+    const fetchInvoiceTemplates = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/contractTemplates');
-            setContractTemplates(response.data);
+            const response = await axios.get('http://localhost:8080/invoiceTemplates');
+            setInvoiceTemplates(response.data);
         } catch (error) {
-            console.error('Error fetching contract templates:', error);
+            console.error('Error fetching invoice templates:', error);
         }
     };
 
-    const createContractTemplate = async () => {
+    const createInvoiceTemplate = async () => {
         try {
-            await axios.post('http://localhost:8080/contractTemplates', newContractTemplate);
-            fetchContractTemplates();
-            setNewContractTemplate({
+            await axios.post('http://localhost:8080/invoiceTemplates', newInvoiceTemplate);
+            fetchInvoiceTemplates();
+            setNewInvoiceTemplate({
                 name: '',
                 template: ''
             });
         } catch (error) {
-            console.error('Error creating contract template:', error);
+            console.error('Error creating invoice template:', error);
         }
     };
 
-    const updateContractTemplate = async () => {
+    const updateInvoiceTemplate = async () => {
         try {
-            await axios.put(`http://localhost:8080/contractTemplates/${editContractTemplate.id}`, editContractTemplate);
-            fetchContractTemplates();
-            setEditContractTemplate(null);
+            await axios.put(`http://localhost:8080/invoiceTemplates/${editInvoiceTemplate.id}`, editInvoiceTemplate);
+            fetchInvoiceTemplates();
+            setEditInvoiceTemplate(null);
         } catch (error) {
             console.error('Error updating artist request:', error);
         }
     };
 
-    const deleteContractTemplate = async (id) => {
+    const deleteInvoiceTemplate = async (id) => {
         try {
-            await axios.delete(`http://localhost:8080/contractTemplates/${id}`);
-            fetchContractTemplates();
+            await axios.delete(`http://localhost:8080/invoiceTemplates/${id}`);
+            fetchInvoiceTemplates();
         } catch (error) {
-            console.error('Error deleting contract template:', error);
+            console.error('Error deleting invoice template:', error);
         }
     };
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        createContractTemplate();
+        createInvoiceTemplate();
       };
 
     const handleEditSubmit = (e) => {
         e.preventDefault();
-        updateContractTemplate();
+        updateInvoiceTemplate();
     }
 
     const handleInputChange = (event) => {
         const { name, value } = event.target;
-        setNewContractTemplate({ ...newContractTemplate, [name]: value });
+        setNewInvoiceTemplate({ ...newInvoiceTemplate, [name]: value });
     };
 
     const handleEditInputChange = (event) => {
         const { name, value } = event.target;
-        setEditContractTemplate({ ...editContractTemplate, [name]: value });
+        setEditInvoiceTemplate({ ...editInvoiceTemplate, [name]: value });
     };
 
     const handleCancelEdit = () => {
-        setEditContractTemplate(null);
+        setEditInvoiceTemplate(null);
     };
 
-    const handleEditClick = (contractTemplateToEdit) => {
-        setEditContractTemplate(contractTemplateToEdit);
+    const handleEditClick = (invoiceTemplateToEdit) => {
+        setEditInvoiceTemplate(invoiceTemplateToEdit);
     };
 
     return (
         <div>
-            <h2>Dokumentvorlagen</h2>
-
-            <div class="row my-4">
+            <div class="row">
     <div class="col-12 col-xl-8 mb-4 mb-lg-0">
     <div class="card">
-      <h5 class="card-header">Vertragsvorlagen</h5>
+      <h5 class="card-header">Rechnungsvorlagen</h5>
       <div class="card-body">                        
             <div class="col-md-6">                     
                     <div class="table-responsive">                                
@@ -107,21 +104,21 @@ function ContractTemplate() {
                     </tr>
                 </thead>
                 <tbody>
-                    {contractTemplates.map(template => (
+                    {invoiceTemplates.map(template => (
                         <tr key={template.id}>
                             <td>{template.id}</td>
                             <td>{template.name}</td>
                             <td>{template.template.substr(0,50)}</td>
                             <td>
-                                {editContractTemplate && editContractTemplate.id === template.id ? (
+                                {editInvoiceTemplate && editInvoiceTemplate.id === template.id ? (
                                     <div>
-                                        <button onClick={updateContractTemplate}>Save</button>
+                                        <button onClick={updateInvoiceTemplate}>Save</button>
                                         <button onClick={handleCancelEdit}>Cancel</button>
                                     </div>
                                 ) : (
                                     <div>
                                         <button onClick={() => handleEditClick(template)}>Edit</button>
-                                        <button onClick={() => deleteContractTemplate(template.id)}>Delete</button>
+                                        <button onClick={() => deleteInvoiceTemplate(template.id)}>Delete</button>
                                     </div>
                                 )}
                             </td>
@@ -132,16 +129,16 @@ function ContractTemplate() {
             </div>
             </div>
             
-            {editContractTemplate == null ? (
+            {editInvoiceTemplate == null ? (
                 <form class="row g-3" onSubmit={handleSubmit}>
                     <div class="col-md-12">
                         <label for="templateName" class="form-label">Templatename</label>
-                        <input class="form-control" name="name" type="text" value={newContractTemplate.name} onChange={handleInputChange} />
+                        <input class="form-control" name="name" type="text" value={newInvoiceTemplate.name} onChange={handleInputChange} />
                     </div>
                     <div class="col-md-12">                    
                         <label for="templateContent">Template</label>                    
                         <CodeEditor
-                        value={newContractTemplate.template}
+                        value={newInvoiceTemplate.template}
                         language="html"
                         name="template"
                         placeholder="Template hier editieren"
@@ -154,19 +151,19 @@ function ContractTemplate() {
                         />  
                     </div>
                     <div class="col-md-12">                    
-                        <button class="btn btn-primary" type="submit">Vertragsvorlage hinzuf&uuml;gen</button>                        
+                        <button class="btn btn-primary" type="submit">Rechnungsvorlage hinzuf&uuml;gen</button>                        
                     </div>
                 </form>
             ) : (
                 <form class="row g-3" onSubmit={handleEditSubmit}>
                     <div class="col-md-12">
                         <label for="templateName" class="form-label">Templatename</label>
-                        <input class="form-control" type="text" name="name" value={editContractTemplate.name} onChange={handleEditInputChange} />
+                        <input class="form-control" type="text" name="name" value={editInvoiceTemplate.name} onChange={handleEditInputChange} />
                     </div>
                     <div class="col-md-12">                    
                         <label for="templateContent">Template</label>                    
                         <CodeEditor
-                        value={editContractTemplate.template}
+                        value={editInvoiceTemplate.template}
                         language="html"
                         placeholder="Template hier editieren"
                         onChange={handleEditInputChange}
@@ -184,12 +181,8 @@ function ContractTemplate() {
                 </form>
             )}            
         </div>
-        </div></div></div>
-        
-        <InvoiceTemplate />
-        
-        </div>        
+        </div></div></div></div>
     );
 }
 
-export default ContractTemplate;
+export default InvoiceTemplate;

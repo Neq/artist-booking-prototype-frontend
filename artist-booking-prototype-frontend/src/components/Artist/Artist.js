@@ -7,6 +7,7 @@ import ArtistForm from './ArtistForm';
 function Artist() {
 
     const [contractTemplates, setContractTemplates] = useState([]);
+    const [invoiceTemplates, setInvoiceTemplates] = useState([]);
     const [artists, setArtists] = useState([]);
     const [newArtist, setNewArtist] = useState({
         name: '',
@@ -20,7 +21,8 @@ function Artist() {
         firstname: '',
         lastname: '',
         phone: '',
-        contractTemplateId: ''
+        contractTemplateId: '',
+        invoiceTemplateId: ''
     });
     const [editArtist, setEditArtist] = useState(null);
     
@@ -82,7 +84,16 @@ function Artist() {
         } catch (error) {
             console.error('Error fetching contract templates:', error);
         }
-      };
+    };
+
+    const fetchInvoiceTemplates = async () => {
+      try {
+          const response = await axios.get('http://localhost:8080/invoiceTemplates');
+          setInvoiceTemplates(response.data);
+      } catch (error) {
+          console.error('Error fetching invoice templates:', error);
+      }
+    };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -97,6 +108,7 @@ function Artist() {
   
   useEffect(() => {        
     fetchContractTemplates();
+    fetchInvoiceTemplates();
     fetchArtists();
   }, []);
 
@@ -117,6 +129,8 @@ function Artist() {
                                             <th scope="col">Artist Email</th>
                                             <th scope="col">Land</th>
                                             <th scope="col">Addresse</th>                                            
+                                            <th scope="col">Vertragsvorlagenid</th>
+                                            <th scope="col">Rechnungsvorlagenid</th>
                                           </tr>
                                         </thead>
                                         <tbody>
@@ -128,6 +142,7 @@ function Artist() {
                                             <td>{artist.country}</td>
                                             <td>{artist.address}</td>
                                             <td>{artist.contractTemplateId}</td>
+                                            <td>{artist.invoiceTemplateId}</td>
                                             <td><a href="#" class="btn btn-sm btn-primary" onClick={() => handleEditClick(artist)}>Bearbeiten</a>
                                             <a href="#" class="btn btn-sm btn-primary" onClick={() => deleteArtist(artist.id)}>L&ouml;schen</a></td>
                                           </tr>
@@ -154,6 +169,15 @@ function Artist() {
                 <option value="">Vertragsvorlage w&auml;hlen</option>
                 {contractTemplates.map(contractTemplate => (
                 <option key={contractTemplate.id} value={contractTemplate.id}>{contractTemplate.name}</option>
+                ))}
+            </select>
+        </div>
+        <div class="col-md-6">
+            <label for="newArtistInvoiceTemplateId" class="form-label">Rechnungsvorlage</label>
+            <select class="form-select" id="newArtistContractTemplateId" name="invoiceTemplateId" value={newArtist.invoiceTemplateId} onChange={handleInputChange}>
+                <option value="">Vertragsvorlage w&auml;hlen</option>
+                {invoiceTemplates.map(invoiceTemplate => (
+                <option key={invoiceTemplate.id} value={invoiceTemplate.id}>{invoiceTemplate.name}</option>
                 ))}
             </select>
         </div>
@@ -296,6 +320,15 @@ function Artist() {
       ))}
     </select>
 </div>
+<div class="col-md-6">
+            <label for="newArtistInvoiceTemplateId" class="form-label">Rechnungsvorlage</label>
+            <select class="form-select" id="newArtistContractTemplateId" name="invoiceTemplateId" value={editArtist.invoiceTemplateId} onChange={handleEditInputChange}>
+                <option value="">Vertragsvorlage w&auml;hlen</option>
+                {invoiceTemplates.map(invoiceTemplate => (
+                <option key={invoiceTemplate.id} value={invoiceTemplate.id}>{invoiceTemplate.name}</option>
+                ))}
+            </select>
+        </div>
 <div class="col-md-6">
  <label for="editArtistName" class="form-label">Künstlername</label>
  <input class="form-control" id="editArtistName"
