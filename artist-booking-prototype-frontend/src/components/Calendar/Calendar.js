@@ -94,6 +94,10 @@ export default function Calendar() {
       }
 
     return (
+      <div>
+        {offerStatus.map(offerStatusItem => (
+            <span style={{backgroundColor: offerStatusItem.color}}>{offerStatusItem.status}</span>
+        ))}
         <FullCalendar
         plugins={[ dayGridPlugin ]}
         locale="deLocale"
@@ -102,6 +106,7 @@ export default function Calendar() {
         initialView="dayGridMonth"  
         eventContent={renderEventContent}      
         />
+        </div>
     )
 }
 

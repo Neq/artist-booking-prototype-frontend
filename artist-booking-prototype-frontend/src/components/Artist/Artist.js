@@ -53,7 +53,7 @@ function Artist() {
 
     const updateArtist = async () => {
         try {
-            await axios.put(`http://localhost:8080/artist/${editArtist.id}`, editArtist);
+            await axios.put(`http://localhost:8080/artists/${editArtist.id}`, editArtist);
             fetchArtists();
             setEditArtist(null);
         } catch (error) {
@@ -421,7 +421,7 @@ function Artist() {
       />
 </div>
 <div class="col-12">
-      <button class="btn btn-primary" type="submit">K&uuml;stler hinzuf&uuml;gen</button>      
+      <button class="btn btn-primary" type="submit">&Auml;nderungen speichern</button>      
 </div>
 </form>
 )}
