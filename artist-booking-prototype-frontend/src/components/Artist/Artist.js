@@ -25,6 +25,7 @@ function Artist() {
         invoiceTemplateId: ''
     });
     const [editArtist, setEditArtist] = useState(null);
+    const [artistFiles, setArtistFiles] = useState([]);
     
     const fetchArtists = async () => {
         try {
@@ -95,6 +96,15 @@ function Artist() {
       }
     };
 
+    const fetchFilesFromArtist = async (artistId) => {
+      try {
+          const response = await axios.get(`http://localhost:8080/artistFiles/${artistId}`);
+          setArtistFiles(response.data);
+      } catch (error) {
+          console.error('Error fetching invoice templates:', error);
+      }
+    };
+
   const handleSubmit = (e) => {
     e.preventDefault();
     createArtist();
@@ -144,7 +154,9 @@ function Artist() {
                                             <td>{artist.contractTemplateId}</td>
                                             <td>{artist.invoiceTemplateId}</td>
                                             <td><a href="#" class="btn btn-sm btn-primary" onClick={() => handleEditClick(artist)}>Bearbeiten</a>
-                                            <a href="#" class="btn btn-sm btn-primary" onClick={() => deleteArtist(artist.id)}>L&ouml;schen</a></td>
+                                            <a href="#" class="btn btn-sm btn-primary" onClick={() => deleteArtist(artist.id)}>L&ouml;schen</a>
+                                            <a href="#" class="btn btn-sm btn-primary" onClick={() => fetchFilesFromArtist(artist.id)}>Dateien</a>
+                                            </td>
                                           </tr>
                                           ))}                                         
                                         </tbody>
@@ -458,6 +470,12 @@ function Artist() {
 </div>
 </form>
 )}
+
+Artist files:
+<ul>
+{artistFiles.map(artistFile => (
+  <li>{artistFile.filename}</li>
+))}</ul>
 </div>
 </div>
 </div>
