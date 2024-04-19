@@ -4,7 +4,7 @@ import axios from 'axios';
 import CodeEditor from '@uiw/react-textarea-code-editor';
 import InvoiceTemplate from './InvoiceTemplate';
 
-function ContractTemplate() {    
+function DocumentTemplates() {    
     const [contractTemplates, setContractTemplates] = useState([]);
     const [newContractTemplate, setNewContractTemplate] = useState({        
         name: '',
@@ -192,4 +192,4 @@ function ContractTemplate() {
     );
 }
 
-export default ContractTemplate;
+export default DocumentTemplates;
