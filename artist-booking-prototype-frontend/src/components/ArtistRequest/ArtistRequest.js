@@ -7,12 +7,19 @@ function ArtistRequest() {
     const [artists, setArtists] = useState([]);
     const [newRequest, setNewRequest] = useState({        
         artistId: '',
+        eventName: '',
         eventStart: '',
         eventEnd: '',
         notes: '',
         offerStatusId: '',
         locationName: '',
-        locationWebsite: ''
+        locationWebsite: '',
+        price: '',
+        invoiceAddress: '',
+        invoiceCountry: '',
+        invoiceName: '',
+        invoiceZipCode: '',
+        invoicePlace: ''
     });
     const [offerStatus, setOfferStatus] = useState([])
     const [editRequest, setEditRequest] = useState(null);
@@ -51,12 +58,19 @@ function ArtistRequest() {
             fetchArtistRequests();
             setNewRequest({                
                 artistId: '',
+                eventName: '',
                 eventStart: '',
                 eventEnd: '',
                 notes: '',
                 offerStatusId: '',
                 locationName: '',
-                locationWebsite: ''
+                locationWebsite: '',
+                price: '',
+                invoiceAddress: '',
+                invoiceCountry: '',
+                invoiceName: '',
+                invoiceZipCode: '',
+                invoicePlace: ''
             });
         } catch (error) {
             console.error('Error creating artist request:', error);
@@ -200,15 +214,15 @@ function ArtistRequest() {
                 </div>
                 <div class="col-md-6">
                     <label for="newRequestEventStart" class="form-label">Event Start</label>                
-                    <input class="form-control" type="text" name="eventStart" placeholder="Event Start" value={newRequest.eventStart} onChange={handleInputChange} required />
+                    <input class="form-control" type="datetime-local" name="eventStart" placeholder="Event Start" value={newRequest.eventStart} onChange={handleInputChange} required />
                 </div>
                 <div class="col-md-6">
                     <label for="newRequestEventEnd" class="form-label">Event End</label>                
-                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} required />
+                    <input class="form-control" type="datetime-local" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} required />
                 </div>
                 <div class="col-md-6">
-                    <label for="newRequestEventEnd" class="form-label">Event End</label>                
-                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={newRequest.eventEnd} onChange={handleInputChange} required />
+                    <label for="newRequestEventName" class="form-label">Name des Events</label>                
+                    <input class="form-control" type="text" name="eventName" placeholder="Eventname" value={newRequest.eventName} onChange={handleInputChange} required />
                 </div>
                 <div class="col-md-6">
                     <label for="newRequestNotes" class="form-label">Notizen</label>                
@@ -221,6 +235,30 @@ function ArtistRequest() {
                 <div class="col-md-6">
                     <label for="newRequestLocationWebsite" class="form-label">Location Website</label>                
                     <input class="form-control" type="text" name="locationWebsite" placeholder="Website der Location" value={newRequest.locationWebsite} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoiceAddress" class="form-label">Rechnungsadresse</label>                
+                    <input class="form-control" type="text" name="invoiceAddress" placeholder="Rechnungsadresse" value={newRequest.invoiceAddress} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoicePlz" class="form-label">Rechnungs PLZ</label>                
+                    <input class="form-control" type="text" name="invoiceZipCode" placeholder="PLZ der Rechnung" value={newRequest.invoiceZipCode} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoiceCountry" class="form-label">Rechnungs Land</label>                
+                    <input class="form-control" type="text" name="invoiceCountry" placeholder="Land der Rechnung" value={newRequest.invoiceCountry} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoiceName" class="form-label">Name der Rechnung</label>                
+                    <input class="form-control" type="text" name="invoiceName" placeholder="Name der Rechnung" value={newRequest.invoiceName} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoicePlace" class="form-label">Rechnungs Ort</label>                
+                    <input class="form-control" type="text" name="invoicePlace" placeholder="Ort der Rechnung" value={newRequest.invoicePlace} onChange={handleInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestPrice" class="form-label">Preis der Provision</label>                
+                    <input class="form-control" type="number" name="price" placeholder="Preis der Rechnung" value={newRequest.price} onChange={handleInputChange} />                    
                 </div>
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit">Hinzuf&uuml;gen</button>
@@ -248,15 +286,15 @@ function ArtistRequest() {
                 </div>
                 <div class="col-md-6">
                     <label for="editRequestEventStart" class="form-label">Event Start</label>                
-                    <input class="form-control" type="text" name="eventStart" placeholder="Event Start" value={editRequest.eventStart} onChange={handleEditInputChange} required />
+                    <input class="form-control" type="datetime-local" name="eventStart" placeholder="Event Start" value={editRequest.eventStart} onChange={handleEditInputChange} required />
                 </div>
                 <div class="col-md-6">
                     <label for="editRequestEventEnd" class="form-label">Event End</label>                
-                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={editRequest.eventEnd} onChange={handleEditInputChange} required />
+                    <input class="form-control" type="datetime-local" name="eventEnd" placeholder="Event End" value={editRequest.eventEnd} onChange={handleEditInputChange} required />
                 </div>
                 <div class="col-md-6">
-                    <label for="editRequestEventEnd" class="form-label">Event End</label>                
-                    <input class="form-control" type="text" name="eventEnd" placeholder="Event End" value={editRequest.eventEnd} onChange={handleEditInputChange} required />
+                    <label for="newRequestEventName" class="form-label">Name des Events</label>                
+                    <input class="form-control" type="text" name="eventName" placeholder="Eventname" value={newRequest.eventName} onChange={handleInputChange} required />
                 </div>
                 <div class="col-md-6">
                     <label for="editRequestNotes" class="form-label">Notizen</label>                
@@ -269,6 +307,30 @@ function ArtistRequest() {
                 <div class="col-md-6">
                     <label for="editRequestLocationWebsite" class="form-label">Location Website</label>                
                     <input class="form-control" type="text" name="locationWebsite" placeholder="Website der Location" value={editRequest.locationWebsite} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoiceAddress" class="form-label">Rechnungsadresse</label>                
+                    <input class="form-control" type="text" name="invoiceAddress" placeholder="Rechnungsadresse" value={editRequest.invoiceAddress} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoicePlz" class="form-label">Rechnungs PLZ</label>                
+                    <input class="form-control" type="text" name="invoicePlz" placeholder="PLZ der Rechnung" value={editRequest.invoicePlz} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoiceCountry" class="form-label">Rechnungs Land</label>                
+                    <input class="form-control" type="text" name="invoiceCountry" placeholder="Land der Rechnung" value={editRequest.invoiceCountry} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoiceName" class="form-label">Name der Rechnung</label>                
+                    <input class="form-control" type="text" name="invoiceName" placeholder="Name der Rechnung" value={editRequest.invoiceName} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestInvoicePlace" class="form-label">Rechnungs Ort</label>                
+                    <input class="form-control" type="text" name="invoicePlace" placeholder="Ort der Rechnung" value={editRequest.invoicePlace} onChange={handleEditInputChange} />                    
+                </div>
+                <div class="col-md-6">
+                    <label for="newRequestPrice" class="form-label">Preis der Provision</label>                
+                    <input class="form-control" type="number" name="price" placeholder="Preis der Rechnung" value={editRequest.price} onChange={handleEditInputChange} />                    
                 </div>
                 <div class="col-12">
                     <button class="btn btn-primary" type="submit">&Auml;nderungen speichern</button>

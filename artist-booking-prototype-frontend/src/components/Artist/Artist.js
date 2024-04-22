@@ -126,7 +126,7 @@ function Artist() {
     
     return (<div>
         <div class="row my-4">
-    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="col-12">
                         <div class="card">
                             <h5 class="card-header">K&uuml;stler</h5>
                             <div class="card-body">
@@ -161,8 +161,7 @@ function Artist() {
                                           ))}                                         
                                         </tbody>
                                       </table>
-                                </div>
-                                <a href="#" class="btn btn-block btn-light">View all</a>
+                                </div>                                
                             </div>
                         </div>
                     </div>    
@@ -471,15 +470,28 @@ function Artist() {
 </form>
 )}
 
-Artist files:
-<ul>
-{artistFiles.map(artistFile => (
-  <li>{artistFile.filename}</li>
-))}</ul>
+
 </div>
 </div>
 </div>
 </div>
+
+{artistFiles != null ? (
+  <div class="row my-4">
+  <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+  <div class="card">
+    <h5 class="card-header">Erzeugte Dateien zum Künstler</h5>
+    <div class="card-body">
+      <ul>
+      {artistFiles.map(artistFile => (
+        <li>{artistFile.filename}</li>
+      ))}</ul>
+  </div>
+  </div>
+  </div>
+  </div>
+) : ( <div></div> )}
+
 </div>            
     )
 }

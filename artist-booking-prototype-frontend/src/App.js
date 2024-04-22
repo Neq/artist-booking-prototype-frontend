@@ -37,22 +37,7 @@ function App() {
             <button class="navbar-toggler d-md-none collapsed mb-3" type="button" data-toggle="collapse" data-target="#sidebar" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
-        </div>        
-        <div class="col-12 col-md-5 col-lg-8 d-flex align-items-center justify-content-md-end mt-3 mt-md-0">
-            <div class="mr-3 mt-1">
-                <a class="github-button" href="https://github.com/themesberg/simple-bootstrap-5-dashboard" data-color-scheme="no-preference: dark; light: light; dark: light;" data-icon="octicon-star" data-size="large" data-show-count="true" aria-label="Star /themesberg/simple-bootstrap-5-dashboard">Star</a>
-            </div>
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-expanded="false">
-                  Hallo {username}!
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-                  <li><a class="dropdown-item" href="#">Settings</a></li>
-                  <li><a class="dropdown-item" href="#">Messages</a></li>
-                  <li><a class="dropdown-item" href="#">Sign out</a></li>
-                </ul>
-              </div>
-        </div>
+        </div>                
     </nav>
     <div class="container-fluid">
         <div class="row">
