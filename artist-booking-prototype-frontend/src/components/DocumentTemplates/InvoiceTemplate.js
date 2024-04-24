@@ -112,13 +112,13 @@ function InvoiceTemplate() {
                             <td>
                                 {editInvoiceTemplate && editInvoiceTemplate.id === template.id ? (
                                     <div>
-                                        <button onClick={updateInvoiceTemplate}>Save</button>
-                                        <button onClick={handleCancelEdit}>Cancel</button>
+                                        <button class="btn btn-primary" onClick={updateInvoiceTemplate}>Save</button>
+                                        <button class="btn btn-primary" onClick={handleCancelEdit}>Cancel</button>
                                     </div>
                                 ) : (
                                     <div>
-                                        <button onClick={() => handleEditClick(template)}>Edit</button>
-                                        <button onClick={() => deleteInvoiceTemplate(template.id)}>Delete</button>
+                                        <button class="btn btn-primary" onClick={() => handleEditClick(template)}>Edit</button>
+                                        <button class="btn btn-primary" onClick={() => deleteInvoiceTemplate(template.id)}>Delete</button>
                                     </div>
                                 )}
                             </td>

@@ -30,7 +30,7 @@ function Artist() {
     const fetchArtists = async () => {
         try {
             const response = await axios.get('http://localhost:8080/artists');
-            setArtists(response.data);
+            setArtists(response.data);            
         } catch (error) {
             console.error('Error fetching tasks:', error);
         }
@@ -40,6 +40,21 @@ function Artist() {
         try {
             const response = await axios.post('http://localhost:8080/artists', newArtist);
             setArtists([...artists, response.data]);      
+            setNewArtist({
+              name: '',
+              management: '',
+              managementEmail: '',
+              managementPhone: '',
+              email: '',
+              country: '',
+              address: '',
+              zipCode: '',
+              firstname: '',
+              lastname: '',
+              phone: '',
+              contractTemplateId: '',
+              invoiceTemplateId: ''
+          });
         } catch (error) {
             console.error('Error adding new Artist:', error);
         }
@@ -155,7 +170,7 @@ function Artist() {
                                             <td>{artist.invoiceTemplateId}</td>
                                             <td><a href="#" class="btn btn-sm btn-primary" onClick={() => handleEditClick(artist)}>Bearbeiten</a>
                                             <a href="#" class="btn btn-sm btn-primary" onClick={() => deleteArtist(artist.id)}>L&ouml;schen</a>
-                                            <a href="#" class="btn btn-sm btn-primary" onClick={() => fetchFilesFromArtist(artist.id)}>Dateien</a>
+                                            <a href="#" class="btn btn-sm btn-primary" onClick={() => fetchFilesFromArtist(artist.id)}>Dokumente</a>
                                             </td>
                                           </tr>
                                           ))}                                         
@@ -168,7 +183,7 @@ function Artist() {
                     </div>
 
 <div class="row">
-<div class="col-12 col-xl-8 mb-4 mb-lg-0">
+<div class="col-12">
 <div class="card">
   <h5 class="card-header">K&uuml;stler hinzuf&uuml;gen</h5>
   <div class="card-body">
@@ -276,9 +291,20 @@ function Artist() {
                 <label for="newArtistZipCode" class="form-label">PLZ</label>
                 <input id="newArtistZipCode" class="form-control"
                 type="text"
-                placeholder="Artist zip code"
+                placeholder="Artist PLZ"
                 name="zipCode"
                 value={newArtist.zipCode}
+                onChange={handleInputChange}
+                required
+                />
+        </div>
+        <div class="col-md-6">
+                <label for="newArtistPlace" class="form-label">Ort</label>
+                <input id="newArtistPlace" class="form-control"
+                type="text"
+                placeholder="Artist Ort"
+                name="place"
+                value={newArtist.place}
                 onChange={handleInputChange}
                 required
                 />
@@ -432,6 +458,17 @@ function Artist() {
       />
 </div>
 <div class="col-md-6">
+                <label for="newArtistPlace" class="form-label">Ort</label>
+                <input id="newArtistPlace" class="form-control"
+                type="text"
+                placeholder="Artist Ort"
+                name="place"
+                value={editArtist.place}
+                onChange={handleEditInputChange}
+                required
+                />
+        </div>
+<div class="col-md-6">
       <label for="editArtistPhone" class="form-label">Telefon</label>
       <input class="form-control"
         type="text"
@@ -480,7 +517,7 @@ function Artist() {
   <div class="row my-4">
   <div class="col-12 col-xl-8 mb-4 mb-lg-0">
   <div class="card">
-    <h5 class="card-header">Erzeugte Dateien zum Künstler</h5>
+    <h5 class="card-header">Erzeugte Dokumente zum Künstler</h5>
     <div class="card-body">
       <ul>
       {artistFiles.map(artistFile => (

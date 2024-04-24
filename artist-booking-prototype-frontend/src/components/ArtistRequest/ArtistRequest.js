@@ -132,7 +132,7 @@ function ArtistRequest() {
     
     return (
             <div class="row">
-    <div class="col-12 col-xl-8 mb-4 mb-lg-0">
+    <div class="col-12">
     <div class="row my-4">
             <div class="col-12">
                         <div class="card">
@@ -168,13 +168,13 @@ function ArtistRequest() {
                             <td>
                                 {editRequest && editRequest.id === request.id ? (
                                     <div>
-                                        <button onClick={updateArtistRequest}>Save</button>
-                                        <button onClick={handleCancelEdit}>Cancel</button>
+                                        <button class="btn btn-primary" onClick={updateArtistRequest}>Speichern</button>
+                                        <button class="btn btn-primary" onClick={handleCancelEdit}>Abbruch</button>
                                     </div>
                                 ) : (
                                     <div>
-                                        <button onClick={() => handleEditClick(request)}>Edit</button>
-                                        <button onClick={() => deleteArtistRequest(request.id)}>Delete</button>
+                                        <button class="btn btn-primary" onClick={() => handleEditClick(request)}>Bearbeiten</button>
+                                        <button class="btn btn-primary" onClick={() => deleteArtistRequest(request.id)}>Löschen</button>
                                     </div>
                                 )}
                             </td>
@@ -294,7 +294,7 @@ function ArtistRequest() {
                 </div>
                 <div class="col-md-6">
                     <label for="newRequestEventName" class="form-label">Name des Events</label>                
-                    <input class="form-control" type="text" name="eventName" placeholder="Eventname" value={newRequest.eventName} onChange={handleInputChange} required />
+                    <input class="form-control" type="text" name="eventName" placeholder="Eventname" value={editRequest.eventName} onChange={handleInputChange} required />
                 </div>
                 <div class="col-md-6">
                     <label for="editRequestNotes" class="form-label">Notizen</label>                
@@ -313,8 +313,8 @@ function ArtistRequest() {
                     <input class="form-control" type="text" name="invoiceAddress" placeholder="Rechnungsadresse" value={editRequest.invoiceAddress} onChange={handleEditInputChange} />                    
                 </div>
                 <div class="col-md-6">
-                    <label for="newRequestInvoicePlz" class="form-label">Rechnungs PLZ</label>                
-                    <input class="form-control" type="text" name="invoicePlz" placeholder="PLZ der Rechnung" value={editRequest.invoicePlz} onChange={handleEditInputChange} />                    
+                    <label for="newRequestInvoiceZipCode" class="form-label">Rechnungs PLZ</label>                
+                    <input class="form-control" type="text" name="invoiceZipCode" placeholder="PLZ der Rechnung" value={editRequest.invoiceZipCode} onChange={handleEditInputChange} />                    
                 </div>
                 <div class="col-md-6">
                     <label for="newRequestInvoiceCountry" class="form-label">Rechnungs Land</label>                

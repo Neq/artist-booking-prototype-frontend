@@ -87,7 +87,7 @@ export default function Calendar() {
           <>          
             <div style={{backgroundColor: eventInfo.backgroundColor}}>
               <b>{eventInfo.timeText}</b>
-              <i>{eventInfo.event.title} {eventInfo.event.id}</i>
+              <i>{eventInfo.event.title}</i>
             </div>
           </>
         )
@@ -95,8 +95,9 @@ export default function Calendar() {
 
     return (
       <div>
+        <span>Status-Legende: </span>
         {offerStatus.map(offerStatusItem => (
-            <span style={{backgroundColor: offerStatusItem.color}}>{offerStatusItem.status}</span>
+            <span style={{backgroundColor: offerStatusItem.color, marginRight: '10px'}}>{offerStatusItem.status}</span>
         ))}
         <FullCalendar
         plugins={[ dayGridPlugin ]}

@@ -115,13 +115,13 @@ function DocumentTemplates() {
                             <td>
                                 {editContractTemplate && editContractTemplate.id === template.id ? (
                                     <div>
-                                        <button onClick={updateContractTemplate}>Save</button>
-                                        <button onClick={handleCancelEdit}>Cancel</button>
+                                        <button class="btn btn-primary" onClick={updateContractTemplate}>Save</button>
+                                        <button class="btn btn-primary" onClick={handleCancelEdit}>Cancel</button>
                                     </div>
                                 ) : (
                                     <div>
-                                        <button onClick={() => handleEditClick(template)}>Edit</button>
-                                        <button onClick={() => deleteContractTemplate(template.id)}>Delete</button>
+                                        <button class="btn btn-primary" onClick={() => handleEditClick(template)}>Edit</button>
+                                        <button class="btn btn-primary" onClick={() => deleteContractTemplate(template.id)}>Delete</button>
                                     </div>
                                 )}
                             </td>
